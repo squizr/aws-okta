@@ -18,11 +18,14 @@ jobs:
 
     - name: Get dependencies
       run: |
+        sudo apt update -q
+        sudo apt install -yq libusb-dev libusb-1.0.0-dev
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             dep ensure
         fi
+        
 
     - name: Build
       run: go build -v .
